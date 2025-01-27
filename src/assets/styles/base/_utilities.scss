@@ -1,0 +1,52 @@
+.btn {
+  position: relative;
+  background: linear-gradient(to right, #8b5cf6, #6366f1);
+  color: var(--color-white);
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: ease all 0.3s;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    background: #8b5cf6;
+    opacity: 0.3;
+    filter: blur(8px);
+    z-index: -1;
+  }
+  &.cancel {
+    background-color: var(--color-secondary);
+    &:hover {
+      background-color: var(--color-secondary-hover);
+    }
+  }
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-btn-hover);
+  }
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-tag);
+  }
+}
+

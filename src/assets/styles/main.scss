@@ -1,0 +1,18 @@
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/variables';
+@import 'base/utilities';
+@import 'base/fonts';
+
+// Components
+@import 'components/header.scss';
+@import 'components/sidebar.scss';
+@import 'components/student-list.scss';
+@import 'components/student-preview.scss';
+@import 'components/student-modal-form.scss';
+@import 'components/auto-complete-drop-down.scss';
+@import 'components/loading.scss';
+
+// Pages
+@import 'pages/student-index.scss';
+@import 'pages/student-details-page.scss';

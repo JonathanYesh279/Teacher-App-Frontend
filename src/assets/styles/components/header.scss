@@ -1,0 +1,23 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--color-white);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100px;
+  padding-inline: 20px;
+  .logo-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 250px;
+    height: 92px;
+    aspect-ratio: 16/9;
+    padding-top: 5px;
+    img {
+      width: 60%;
+      padding: 0;
+    }
+  }
+}

@@ -53,14 +53,15 @@ export function StudentIndex() {
 
   async function loadStudents() {
     try {
-      setIsLoading(true)
-      const students = await studentService.query(filterBy)
-      setStudents(students)
+      setIsLoading(true);
+      const students = await studentService.query(filterBy);
+      console.log('Students received:', students); // Debug log
+      setStudents(Array.isArray(students) ? students : []);
     } catch (err) {
-      console.error('Failed to load students:', err)
-      setError(err)
+      console.error('Failed to load students:', err);
+      setError(err.message);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
 

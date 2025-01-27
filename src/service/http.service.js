@@ -1,9 +1,10 @@
 import Axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_URL || '//localhost:3030/api/';
+const BASE_URL = import.meta.env.VITE_API_URL || '/api/';
 
 const axios = Axios.create({
   withCredentials: true,
+  baseURL: BASE_URL, // Use baseURL instead of concatenating in the request
 });
 
 export const httpService = {
@@ -24,7 +25,7 @@ export const httpService = {
 async function ajax(endpoint, method = 'GET', data = null) {
   try {
     const res = await axios({
-      url: `${BASE_URL}${endpoint}`,
+      url: endpoint,
       method,
       data,
       params: method === 'GET' ? data : null,

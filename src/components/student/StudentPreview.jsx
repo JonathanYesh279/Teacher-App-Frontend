@@ -43,7 +43,7 @@ export function StudentPreview({ student, onRemoveStudent, onUpdateStudent }) {
         <div className='student-details'>
           <div className='info-row'>
             <p>{student.instrument}</p>
-            <p>כיתה {student.class}</p>
+            {student.class && <p>כיתה {student.class}</p>}
             <p>מורה: {student.teachers?.[0]?.teacherName || ''}</p>
             {Array.isArray(student.orchestras) &&
               student.orchestras.length > 0 && (

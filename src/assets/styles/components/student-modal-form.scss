@@ -12,7 +12,7 @@
   color: var(--color-white);
   transition: all 0.3s ease;
   cursor: pointer;
-  z-index: 10000;
+  z-index: 50;
   &::before {
     content: "";
     position: absolute;

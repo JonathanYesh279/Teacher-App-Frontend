@@ -1,15 +1,15 @@
 .student-preview {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  min-height: 100px;
+  min-height: clamp(100px, 12vh, 120px);
   background: var(--color-white);
   border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  padding: clamp(0.75rem, 2vw, 1rem);
+  margin-bottom: clamp(0.5rem, 2vw, 1rem);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.2s ease;
-  gap: 10px;
+  gap: clamp(6px, 1.5vw, 10px);
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 0.6s ease forwards;
@@ -21,129 +21,129 @@
     }
   }
 
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
   &:hover {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   }
+
   a {
     display: flex;
+    width: 100%;
+    gap: 0.5rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+    }
 
     .student-header {
       display: flex;
       align-items: center;
-      gap: 1rem;
-  
+      gap: clamp(2px, 1vw, 4px);
+      width: 100%;
+
+      @media (min-width: 768px) {
+        width: auto;
+      }
+
       .avatar {
-        width: 40px;
-        height: 40px;
+        width: clamp(24px, 5vw, 30px);
+        height: clamp(24px, 5vw, 30px);
         background-color: var(--color-avatar);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 700;
+        font-size: clamp(12px, 3vw, 14px);
         color: var(--color-avatar-text);
       }
-  
+
       .student-basic-info {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        gap: 0.25rem;
+        width: 100%;
+
+        @media (min-width: 768px) {
+          flex-direction: row;
+          align-items: center;
+          gap: 1rem;
+        }
+
         h4 {
-          min-width: 120px;
-          margin: 0;
-          font-size: 1.125rem;
+          font-size: clamp(14px, 3.5vw, 16px);
           font-weight: 700;
           color: var(--color-text-dark);
-          margin-bottom: 0.25rem;
+          margin: 0;
+          min-width: clamp(100px, 15vw, 120px);
         }
-  
+
         .status-container {
           display: flex;
           align-items: center;
-          min-width: 136px;
-          gap: 0.4rem;
-  
-          .status-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 65px;
-            font-size: 0.875rem;
-            padding: 0.25rem 0.75rem;
+          gap: clamp(0.25rem, 1vw, 0.4rem);
+          flex-wrap: wrap;
+
+          .status-badge, .stage {
+            font-size: clamp(12px, 3vw, 14px);
+            padding: 0.25rem clamp(0.5rem, 2vw, 0.75rem);
             border-radius: 9999px;
-            
-            &.passed {
-              background-color: #dcfce7;
-              color: #15803d;
-            }
-            
-            &.failed {
-              background-color: #fee2e2;
-              color: #b91c1c;
-            }
-            
-            &.not_tested {
-              background-color: #f3f4f6;
-              color: #4b5563;
-            }
+            min-width: clamp(50px, 10vw, 65px);
+            text-align: center;
+            white-space: nowrap;
           }
-  
+
+          .status-badge {
+            &.passed { background-color: #dcfce7; color: #15803d; }
+            &.failed { background-color: #fee2e2; color: #b91c1c; }
+            &.not_tested { background-color: #f3f4f6; color: #4b5563; }
+          }
+
           .stage {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 65px;
-            font-size: 0.875rem;
             color: #6b7280;
-            padding: 0.25rem 0.75rem;
             background-color: #f3f4f6;
-            border-radius: 9999px;
           }
         }
       }
     }
-  
+
     .student-details {
-      display: flex;
-      padding-right: 0.5rem;
-  
+      padding: clamp(0.25rem, 1vw, 0.5rem);
+      width: 100%;
+
       .info-row {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
         flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-bottom: 0.5rem;
-  
+        gap: clamp(0.25rem, 1vw, 0.5rem);
+        margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
+
         p {
-          width: fit-content;
-          height: fit-content;
-          padding: 5px 20px;
+          font-size: clamp(12px, 3vw, 14px);
+          padding: clamp(4px, 1vw, 5px) clamp(12px, 3vw, 20px);
           border-radius: 20px;
           margin: 0;
           background-color: var(--color-tag);
           color: var(--color-text-dark);
+          white-space: nowrap;
         }
       }
     }
   }
 
-
   .actions-container {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: clamp(4px, 1.5vw, 7px);
+    margin-right: auto;
+
     .material-symbols-outlined {
-      padding: 5px;
+      padding: clamp(4px, 1vw, 5px);
       border-radius: 50%;
       background-color: transparent;
       border: none;
-      font-size: 20px;
+      font-size: clamp(18px, 4vw, 20px);
+
       &:hover {
         background-color: var(--color-tag);
         cursor: pointer;

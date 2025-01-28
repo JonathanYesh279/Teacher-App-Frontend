@@ -11,9 +11,6 @@ export const studentService = {
 async function query(filterBy = {}) {
   try {
     const response = await httpService.get('students', filterBy);
-    // Add console.log to debug the response
-    console.log('API Response:', response);
-    // Make sure we're returning an array
     return Array.isArray(response) ? response : [];
   } catch (err) {
     console.error('Failed to get students:', err);

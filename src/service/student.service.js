@@ -10,10 +10,11 @@ export const studentService = {
 
 async function query(filterBy = {}) {
   try {
-    return await httpService.get('students', filterBy)
+    const response = await httpService.get('students', filterBy);
+    return Array.isArray(response) ? response : [];
   } catch (err) {
-    console.error('Failed to get students:', err)
-    throw new Error('Failed to get students')
+    console.error('Failed to get students:', err);
+    throw new Error('Failed to get students');
   }
 }
 

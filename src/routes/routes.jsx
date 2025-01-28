@@ -7,6 +7,10 @@ import { OrchestraDetails } from '../pages/orchestra/OrchestraDetails.jsx'
 
 const routes = [
   {
+    path: '/',
+    element: <StudentIndex />,
+  },
+  {
     path: '/students',
     element: <StudentIndex />,
     children: [

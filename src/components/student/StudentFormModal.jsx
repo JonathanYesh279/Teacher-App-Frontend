@@ -186,6 +186,35 @@ export function StudentFormModal({ onAddStudent, studentToEdit, onUpdateStudent 
               </div>
             </div>
 
+            <div className='form-row'>
+              <div className='form-field'>
+                <AutoCompleteDropDown
+                  value={
+                    formData.stageTest === 'not_tested'
+                      ? 'לא נבחן'
+                      : formData.stageTest === 'passed'
+                      ? 'עבר'
+                      : formData.stageTest === 'failed'
+                      ? 'נכשל'
+                      : ''
+                  }
+                  onChange={(label) => {
+                    const value =
+                      label === 'לא נבחן'
+                        ? 'not_tested'
+                        : label === 'עבר'
+                        ? 'passed'
+                        : label === 'נכשל'
+                        ? 'failed'
+                        : 'not_tested';
+                    setFormData({ ...formData, stageTest: value });
+                  }}
+                  options={['לא נבחן', 'עבר', 'נכשל']}
+                  label='מבחן שלב'
+                />
+              </div>
+            </div>
+
             <div className='dialog-footer'>
               <button
                 type='button'

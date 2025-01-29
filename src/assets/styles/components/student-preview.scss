@@ -1,15 +1,14 @@
 .student-preview {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  min-height: clamp(100px, 12vh, 120px);
+  width: 100%;
+  min-height: 140px;
   background: var(--color-white);
   border-radius: 8px;
-  padding: clamp(0.75rem, 2vw, 1rem);
-  margin-bottom: clamp(0.5rem, 2vw, 1rem);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.2s ease;
-  gap: clamp(6px, 1.5vw, 10px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  gap: 6px;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 0.6s ease forwards;
@@ -30,9 +29,92 @@
     width: 100%;
     gap: 0.5rem;
 
-    @media (min-width: 768px) {
+    // Tablet/iPad Pro
+    @media (min-width: 768px) and (max-width: 1199px) {
+      gap: 1rem;
+
+      .student-header {
+        .avatar {
+          width: 45px;  // Increased from 40px
+          height: 45px;
+          font-size: 20px;
+        }
+
+        .student-basic-info {
+          h4 {
+            padding-inline: 8px;
+            font-size: 18px;
+            min-width: 140px;
+          }
+
+          .status-container {
+            .status-badge, .stage {
+              font-size: 16px;
+              min-width: 80px;
+              padding: 0.35rem 1rem;
+            }
+          }
+        }
+      }
+
+      .student-details {
+        .info-row {
+          p {
+            font-size: 16px;
+            padding: 6px 24px;
+          }
+        }
+      }
+    }
+
+    // Desktop
+    @media (min-width: 1200px) {
       flex-direction: row;
       align-items: center;
+      gap: 1.5rem;
+
+      .student-header {
+        width: auto;
+        margin-inline:10px;
+        .avatar {
+          width: 50px;  
+          height: 45px;
+          font-size: 22px;
+        }
+
+        .student-basic-info {
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 1.5rem;
+
+          h4 {
+            font-size: 20px;
+            min-width: 160px;
+          }
+
+          .status-container {
+            .status-badge, .stage {
+              font-size: 16px;
+              min-width: 85px;
+              padding: 0.4rem 1.2rem;
+            }
+          }
+        }
+      }
+
+      .student-details {
+        padding: 0.5rem;
+        
+        .info-row {
+          gap: 0.75rem;
+          
+          p {
+            font-size: 16px;
+            padding: 8px 28px;
+          }
+        }
+      }
     }
 
     .student-header {
@@ -41,41 +123,32 @@
       gap: clamp(2px, 1vw, 4px);
       width: 100%;
 
-      @media (min-width: 768px) {
-        width: auto;
-      }
-
       .avatar {
-        width: clamp(24px, 5vw, 30px);
-        height: clamp(24px, 5vw, 30px);
+        width: 45px;
+        height: 40px;
         background-color: var(--color-avatar);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 700;
-        font-size: clamp(12px, 3vw, 14px);
+        font-size: clamp(16px, 3vw, 18px);  // Increased font size
         color: var(--color-avatar-text);
       }
 
       .student-basic-info {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;  
+        padding-inline: 8px;
         gap: 0.25rem;
-        width: 100%;
-
-        @media (min-width: 768px) {
-          flex-direction: row;
-          align-items: center;
-          gap: 1rem;
-        }
 
         h4 {
           font-size: clamp(14px, 3.5vw, 16px);
           font-weight: 700;
           color: var(--color-text-dark);
           margin: 0;
-          min-width: clamp(100px, 15vw, 120px);
+          min-width: clamp(120px, 15vw, 85px);
         }
 
         .status-container {
@@ -94,9 +167,9 @@
           }
 
           .status-badge {
-            &.passed { background-color: #dcfce7; color: #15803d; }
-            &.failed { background-color: #fee2e2; color: #b91c1c; }
-            &.not_tested { background-color: #f3f4f6; color: #4b5563; }
+            &.passed { background: linear-gradient(90deg, #4ade80, #22c55e); color: white; }
+            &.failed { background: linear-gradient(90deg, #f87171, #ef4444); color: white; }
+            &.not_tested { background: linear-gradient(90deg, #9ca3af, #6b7280); color: white; }
           }
 
           .stage {
@@ -142,7 +215,12 @@
       border-radius: 50%;
       background-color: transparent;
       border: none;
-      font-size: clamp(18px, 4vw, 20px);
+      font-size: clamp(16px, 3vw, 18px);  // Decreased from 18px, 4vw, 20px
+
+      @media (min-width: 768px) {
+        font-size: 20px;  // Decreased from 24px
+        padding: 6px;     // Decreased from 8px
+      }
 
       &:hover {
         background-color: var(--color-tag);

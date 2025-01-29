@@ -106,14 +106,12 @@
               transition: all 0.2s ease;
               border: none;
               color: white;
+               span {
+                font-size: 0.6rem;
+               }
 
               &:hover {
                 background-color: rgba(255, 255, 255, 0.3);
-              }
-
-              svg {
-                width: 12px;
-                height: 12px;
               }
             }
 
@@ -154,12 +152,10 @@
     right: 0;
     background: white;
     border-radius: 20px 20px 0 0;
-    padding: 20px 20px calc(env(safe-area-inset-bottom) + 20px) 20px;
     z-index: 101;
     transform: translateY(100%);
     transition: transform 0.3s ease;
     max-height: 75svh;
-    overflow-y: auto;
 
     &.show {
       transform: translateY(0);
@@ -172,9 +168,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
+      padding: 20px 20px 10px;
       border-bottom: 1px solid #eee;
+      z-index: 2;
 
       h3 {
         font-size: 1.2rem;
@@ -193,31 +189,36 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+      padding: 20px 20px calc(env(safe-area-inset-bottom)) 20px;
+      overflow: scroll;
+      height: fit-content;
       gap: 12px;
-      padding-bottom: 80px;
 
       .filter-option {
-        padding: 12px;
-        border-radius: 12px;
-        background: #f8f8f8;
-        cursor: pointer;
-        transition: background 0.2s ease;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        min-height: 40px;
+        width: 100%;
+        padding: 7px 12px;
+        border-radius: 8px;
+        border: 1px solid transparent; 
+        margin: 0;
+        background: transparent; 
+        transition: background 0.2s ease;
+        cursor: pointer;
 
         &.selected {
           background: var(--color-primary);
           color: white;
+          border-color: var(--color-primary);
         }
       }
     }
 
     .apply-button {
-      position: fixed;
-      bottom: calc(env(safe-area-inset-bottom) + 20px);
-      left: 20px;
-      right: 20px;
+      margin: 20px;
+      margin-bottom: calc(env(safe-area-inset-bottom) + 20px);
       padding: 16px;
       background: var(--color-primary);
       color: white;
@@ -226,6 +227,7 @@
       cursor: pointer;
       font-weight: 500;
       box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+      z-index: 2;
 
       &:hover {
         opacity: 0.9;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export function FilterTags({ onFilter, filterBy }) {
   const [openFilter, setOpenFilter] = useState(null);
@@ -26,7 +26,7 @@ export function FilterTags({ onFilter, filterBy }) {
     class: 'כיתה',
     stageTest: 'מבחן שלב',
     orchestras: 'תזמורת',
-  };
+  }
 
   useEffect(
     function () {
@@ -45,7 +45,7 @@ export function FilterTags({ onFilter, filterBy }) {
       };
     },
     [openFilter]
-  );
+  )
 
   function openModal(filterType) {
     setOpenFilter(filterType);
@@ -68,8 +68,8 @@ export function FilterTags({ onFilter, filterBy }) {
       return {
         ...prev,
         [openFilter]: value === selectedOptions[openFilter] ? '' : value,
-      };
-    });
+      }
+    })
   }
 
   function applyFilter() {
@@ -117,8 +117,8 @@ export function FilterTags({ onFilter, filterBy }) {
             <span className='material-symbols-outlined'>check</span>
           )}
         </div>
-      );
-    });
+      )
+    })
   }
 
   return (
@@ -152,21 +152,7 @@ export function FilterTags({ onFilter, filterBy }) {
                       }}
                       aria-label='Clear filter'
                     >
-                      <svg
-                        width='12'
-                        height='12'
-                        viewBox='0 0 12 12'
-                        fill='none'
-                        xmlns='http://www.w3.org/2000/svg'
-                      >
-                        <path
-                          d='M9 3L3 9M3 3L9 9'
-                          stroke='currentColor'
-                          strokeWidth='1.5'
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                        />
-                      </svg>
+                      <span className='material-symbols-outlined'>close</span>
                     </button>
                   </>
                 )}

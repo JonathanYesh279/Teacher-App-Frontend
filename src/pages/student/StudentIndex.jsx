@@ -5,6 +5,8 @@ import { Outlet, useParams, useSearchParams } from 'react-router';
 import { FilterTags } from './../../components/FilterTags';
 import { debounce } from 'lodash';
 import { StudentFormModal } from '../../components/student/StudentFormModal';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext.jsx'
 
 export function StudentIndex() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -13,7 +15,10 @@ export function StudentIndex() {
   const [students, setStudents] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [isInitialized, setIsInitialized] = useState(false)
   const { id } = useParams()
+  const { teacher } = useAuth()
+  const navigate = useNavigate()
   const [filterBy, setFilterBy] = useState({
     txt: searchParams.get('txt') || '',
     instrument: searchParams.get('instrument') || '',
@@ -33,6 +38,13 @@ export function StudentIndex() {
     []
   )
 
+  useEffect(() => {
+    if (!isInitialized && teacher) {
+      loadStudents()
+      setIsInitialized(true)
+    }
+  }, [isInitialized, teacher])
+
   useEffect(() => { 
     if (isFocused && searchInputRef.current) {
       searchInputRef.current.focus()
@@ -40,8 +52,10 @@ export function StudentIndex() {
   }, [isFocused, students])
 
   useEffect(() => {
-    loadStudents()
-  }, [filterBy])
+    if (isInitialized) {
+      loadStudents()
+  }
+  }, [filterBy, isInitialized])
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -54,12 +68,16 @@ export function StudentIndex() {
   async function loadStudents() {
     try {
       setIsLoading(true);
-      const students = await studentService.query(filterBy);
-      console.log('Students received:', students); // Debug log
-      setStudents(Array.isArray(students) ? students : []);
+      const students = await studentService.query(filterBy)
+      setStudents(Array.isArray(students) ? students : [])
+      setError(null)
     } catch (err) {
       console.error('Failed to load students:', err);
-      setError(err.message);
+      if (err.response === 'Unauthorized') {
+        navigate('/login', { replace: true })
+        return 
+      }
+      setError('Failed to load students. Please try again later.');
     } finally {
       setIsLoading(false);
     }

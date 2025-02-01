@@ -8,7 +8,6 @@
   border-radius: 8px;
   transition: box-shadow 0.2s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  gap: 6px;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 0.6s ease forwards;
@@ -215,7 +214,7 @@
       border-radius: 50%;
       background-color: transparent;
       border: none;
-      font-size: clamp(16px, 3vw, 18px);  // Decreased from 18px, 4vw, 20px
+      font-size: clamp(20px, 3vw, 18px);  // Decreased from 18px, 4vw, 20px
 
       @media (min-width: 768px) {
         font-size: 20px;  // Decreased from 24px

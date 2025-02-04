@@ -189,45 +189,37 @@ export function StudentFormModal({ onAddStudent, studentToEdit, onUpdateStudent 
             <div className='form-row'>
               <div className='form-field'>
                 <AutoCompleteDropDown
-                  value={
-                    formData.stageTest === 'not_tested'
-                      ? 'לא נבחן'
-                      : formData.stageTest === 'passed'
-                      ? 'עבר'
-                      : formData.stageTest === 'failed'
-                      ? 'נכשל'
-                      : ''
-                  }
+                  value={formData.stageTest === 'not_tested' ? 'לא נבחן' : 
+                        formData.stageTest === 'passed' ? 'עבר' : 
+                        formData.stageTest === 'failed' ? 'נכשל' : ''}
                   onChange={(label) => {
-                    const value =
-                      label === 'לא נבחן'
-                        ? 'not_tested'
-                        : label === 'עבר'
-                        ? 'passed'
-                        : label === 'נכשל'
-                        ? 'failed'
-                        : 'not_tested';
+                    const value = label === 'לא נבחן' ? 'not_tested' : 
+                                label === 'עבר' ? 'passed' : 
+                                label === 'נכשל' ? 'failed' : 'not_tested';
                     setFormData({ ...formData, stageTest: value });
                   }}
-                  options={['לא נבחן', 'עבר', 'נכשל']}
+                  options={[
+                    'לא נבחן',
+                    'עבר',
+                    'נכשל'
+                  ]}
                   label='מבחן שלב'
                 />
               </div>
             </div>
-
-            <div className='dialog-footer'>
-              <button
-                type='button'
-                className='btn-secondary'
-                onClick={() => setIsOpen(false)}
-              >
-                ביטול
-              </button>
-              <button type='submit' className='btn-primary'>
-                {studentToEdit ? 'עדכן' : 'הוסף תלמיד'}
-              </button>
-            </div>
-          </form>
+              <div className='dialog-footer'>
+                <button
+                  type='button'
+                  className='btn-secondary'
+                  onClick={() => setIsOpen(false)}
+                >
+                  ביטול
+                </button>
+                <button type='submit' className='btn-primary'>
+                  {studentToEdit ? 'עדכן' : 'הוסף תלמיד'}
+                </button>
+              </div>
+            </form>
 
           <DialogPrimitive.Close />
         </DialogPrimitive.Content>

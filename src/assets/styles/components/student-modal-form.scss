@@ -118,18 +118,19 @@
 
     .dialog-footer {
       display: flex;
-      justify-content: flex-end;
+      height: 40px;
       gap: 12px;
-      margin-top: 12px;
+
 
       button {
-        padding: 8px 16px;
         border-radius: 6px;
         font-weight: 500;
+        margin: 0; 
         cursor: pointer;
         transition: all 0.2s ease;
 
         &.btn-primary {
+          width: 50%;
           background-color: #6366f1;
           color: white;
           border: none;
@@ -140,6 +141,8 @@
         }
 
         &.btn-secondary {
+          width: 50%;
+          height: 100%;
           background-color: white;
           color: #64748b;
           border: 1px solid #e2e8f0;

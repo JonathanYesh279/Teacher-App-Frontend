@@ -25,6 +25,7 @@
 
   a {
     display: flex;
+    align-items: center;
     width: 100%;
     gap: 0.5rem;
 
@@ -206,8 +207,8 @@
   .actions-container {
     display: flex;
     align-items: center;
-    gap: clamp(4px, 1.5vw, 7px);
-    margin-right: auto;
+    gap: 5px;
+    margin: 10px;
 
     .material-symbols-outlined {
       padding: clamp(4px, 1vw, 5px);

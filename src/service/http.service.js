@@ -1,10 +1,11 @@
 import Axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_URL || '/api/';
+const BASE_URL =
+  process.env.NODE_ENV === 'production' ? '/api/' : '//localhost:3030/api/';
 
 const axios = Axios.create({
   withCredentials: true,
-  baseURL: BASE_URL, // Use baseURL instead of concatenating in the request
+  baseURL: BASE_URL,
 });
 
 export const httpService = {
@@ -24,22 +25,30 @@ export const httpService = {
 
 async function ajax(endpoint, method = 'GET', data = null) {
   try {
+    const headers = {};
+    const token = sessionStorage.getItem('loginToken');
+
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
     const res = await axios({
       url: endpoint,
       method,
       data,
       params: method === 'GET' ? data : null,
+      headers,
     });
+
     return res.data;
   } catch (err) {
-    console.log(
-      `Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: `,
-      data
-    );
-    console.dir(err);
-    if (err.response && err.response.status === 401) {
-      sessionStorage.clear();
-      window.location.assign('/');
+    if (err.response?.status === 401) {
+      if (endpoint !== 'auth/login') {
+        sessionStorage.removeItem('teacher');
+        sessionStorage.removeItem('loginToken');
+        window.location.href = '/login';
+        return;
+      }
     }
     throw err;
   }

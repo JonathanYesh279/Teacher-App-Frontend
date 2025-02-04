@@ -1,45 +1,64 @@
-import { StudentIndex } from '../pages/student/StudentIndex.jsx'
-import { StudentDetails } from '../pages/student/StudentDetails.jsx'
-import { TeacherIndex } from '../pages/teacher/TeacherIndex.jsx'
-import { TeacherDetails } from '../pages/teacher/TeacherDetails.jsx'
-import { OrchestraIndex } from '../pages/orchestra/OrchestraIndex.jsx'
-import { OrchestraDetails } from '../pages/orchestra/OrchestraDetails.jsx'
+import { Navigate } from 'react-router-dom';
+import { StudentIndex } from '../pages/student/StudentIndex';
+import { StudentDetails } from '../pages/student/StudentDetails';
+import { TeacherIndex } from '../pages/teacher/TeacherIndex';
+import { TeacherDetails } from '../pages/teacher/TeacherDetails';
+import { OrchestraIndex } from '../pages/orchestra/OrchestraIndex';
+import { OrchestraDetails } from '../pages/orchestra/OrchestraDetails';
+import { LoginPage } from '../pages/auth/LoginPage.jsx'
+import { ProtectedRoute } from '../routes/protectedRoutes.jsx'
 
 const routes = [
   {
+    path: '/login',
+    element: <LoginPage />,
+  },
+  {
     path: '/',
-    element: <StudentIndex />,
+    element: <Navigate to='/students' replace />,
   },
   {
     path: '/students',
-    element: <StudentIndex />,
+    element: (
+      <ProtectedRoute>
+        <StudentIndex />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: ':id',
         element: <StudentDetails />,
       },
-    ]
+    ],
   },
   {
     path: '/teachers',
-    element: <TeacherIndex />,
+    element: (
+      <ProtectedRoute roles={['admin']}>
+        <TeacherIndex />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: ':id',
-        element: <TeacherDetails />
-      }
-    ]
+        element: <TeacherDetails />,
+      },
+    ],
   },
   {
     path: '/orchestras',
-    element: <OrchestraIndex />,
+    element: (
+      <ProtectedRoute roles={['admin', 'conductor']}>
+        <OrchestraIndex />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: ':id',
-        element: <OrchestraDetails />
-      }
-    ]
+        element: <OrchestraDetails />,
+      },
+    ],
   },
-]
+];
 
-export default routes
+export default routes;

@@ -51,6 +51,7 @@
     width: 100%;
     display: flex;
     min-height: 0;
+    overflow: hidden;
   }
 
   .menu-checkbox:checked ~ main .sidebar {

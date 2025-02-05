@@ -236,8 +236,6 @@ export function TeacherFormModal({
               </button>
             </div>
           </form>
-
-          <DialogPrimitive.Close />
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>
     </DialogPrimitive.Root>

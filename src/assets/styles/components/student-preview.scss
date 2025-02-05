@@ -216,6 +216,7 @@
       background-color: transparent;
       border: none;
       font-size: clamp(20px, 3vw, 18px);  // Decreased from 18px, 4vw, 20px
+      color: var(--color-icons);
 
       @media (min-width: 768px) {
         font-size: 20px;  // Decreased from 24px

@@ -35,7 +35,7 @@ export function TeacherPreview({ teacher, onRemoveTeacher, onUpdateTeacher }) {
       <div className='actions-container'>
         <button
           className='material-symbols-outlined'
-          onClick={onRemoveTeacher}
+          onClick={() => onRemoveTeacher(teacher._id)}
         >
           delete
         </button>

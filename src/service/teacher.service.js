@@ -35,9 +35,9 @@ async function add(teacher) {
   }
 }
 
-async function remove(id) {
+async function remove(teacherId) {
   try {
-    return await httpService.delete(`teachers/${id}`)
+    return await httpService.delete(`teachers/${teacherId}`)
   } catch (err) {
     console.error('Failed to remove teacher:', err)
     throw new Error('Failed to remove teacher')

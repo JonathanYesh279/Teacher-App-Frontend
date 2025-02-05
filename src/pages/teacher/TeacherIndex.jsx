@@ -65,6 +65,7 @@ export function TeacherIndex() {
 
   async function handleRemoveTeacher(teacherId) { 
     try {
+      setTeachers(prev => prev.filter(teacher => teacher._id !== teacherId))
       await teacherService.remove(teacherId)
       loadTeachers()
     } catch (err) {

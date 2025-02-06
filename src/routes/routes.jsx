@@ -1,3 +1,4 @@
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { StudentIndex } from '../pages/student/StudentIndex';
 import { StudentDetails } from '../pages/student/StudentDetails';

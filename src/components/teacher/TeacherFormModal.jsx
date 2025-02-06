@@ -146,6 +146,7 @@ export function TeacherFormModal({
                   <label htmlFor='email'>אימייל</label>
                 </div>
               </div>
+              
               <div className='form-field'>
                 <div className='input-container'>
                   <input

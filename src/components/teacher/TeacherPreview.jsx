@@ -3,7 +3,6 @@ import { TeacherFormModal } from './TeacherFormModal'
 
 export function TeacherPreview({ teacher, onRemoveTeacher, onUpdateTeacher }) {
   if (!teacher) return null
-  console.log(teacher)
 
   function getTeacherRoles() {
     return teacher.roles.map(role => {

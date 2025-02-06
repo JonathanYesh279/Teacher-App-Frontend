@@ -119,9 +119,9 @@ export function StudentIndex() {
     try {
       setStudents(prev => prev.filter(student => student._id !== studentId))
       await studentService.remove(studentId)
+      loadStudents()
     } catch (err) {
       console.error('Failed to remove student:', err)
-      loadStudents()
       throw new Error('Failed to remove student')
     }
   }

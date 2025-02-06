@@ -1,7 +1,6 @@
 import Axios from 'axios';
 
-const BASE_URL =
-  process.env.NODE_ENV === 'production' ? '/api/' : '//localhost:3030/api/';
+const BASE_URL = process.env.NODE_ENV === 'production' ? '/api/' : '//localhost:3030/api/';
 
 const axios = Axios.create({
   withCredentials: true,
@@ -25,9 +24,9 @@ export const httpService = {
 
 async function ajax(endpoint, method = 'GET', data = null) {
   try {
-    const headers = {};
+    // Add auth token to request if it exists
     const token = sessionStorage.getItem('loginToken');
-
+    const headers = {};
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
     }
@@ -37,18 +36,15 @@ async function ajax(endpoint, method = 'GET', data = null) {
       method,
       data,
       params: method === 'GET' ? data : null,
-      headers,
+      headers
     });
-
     return res.data;
   } catch (err) {
+    console.error(`Had Issues ${method}ing to server:`, err);
     if (err.response?.status === 401) {
-      if (endpoint !== 'auth/login') {
-        sessionStorage.removeItem('teacher');
-        sessionStorage.removeItem('loginToken');
-        window.location.href = '/login';
-        return;
-      }
+      sessionStorage.removeItem('teacher');
+      sessionStorage.removeItem('loginToken');
+      return Promise.reject(new Error('Unauthorized'));
     }
     throw err;
   }

@@ -29,9 +29,11 @@
 
     a {
       display: flex;
+      gap: clamp(2px, 1vw, 4px);
       .teacher-header {
         display: flex;
         flex-direction: column;
+        padding-inline: 8px;
         align-items: flex-start;
         gap: 5px;
         h3 {

@@ -146,6 +146,7 @@ export function TeacherFormModal({
                   <label htmlFor='email'>אימייל</label>
                 </div>
               </div>
+              
               <div className='form-field'>
                 <div className='input-container'>
                   <input
@@ -236,8 +237,6 @@ export function TeacherFormModal({
               </button>
             </div>
           </form>
-
-          <DialogPrimitive.Close />
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>
     </DialogPrimitive.Root>

@@ -220,8 +220,6 @@ export function StudentFormModal({ onAddStudent, studentToEdit, onUpdateStudent 
                 </button>
               </div>
             </form>
-
-          <DialogPrimitive.Close />
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>
     </DialogPrimitive.Root>

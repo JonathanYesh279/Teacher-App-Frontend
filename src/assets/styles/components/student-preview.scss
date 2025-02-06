@@ -1,242 +1,181 @@
-.student-preview {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.student-preview-container {
+  position: relative;
   width: 100%;
-  min-height: 140px;
-  background: var(--color-white);
+  min-height: 95px;
   border-radius: 8px;
-  transition: box-shadow 0.2s ease;
+  overflow: hidden;
+  background: var(--color-white);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.6s ease forwards;
-  will-change: transform, opacity;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  cursor: grab;
 
-  @for $i from 1 through 20 {
-    &:nth-child(#{$i}) {
-      animation-delay: #{$i * 0.1}s;
-    }
+  &:active {
+    cursor: grabbing;
+    border-color: var(--color-primary, #3572EF);
   }
 
-  &:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  }
-
-  a {
+  .action-buttons {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
     display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 0.5rem;
-
-    // Tablet/iPad Pro
-    @media (min-width: 768px) and (max-width: 1199px) {
-      gap: 1rem;
-
-      .student-header {
-        .avatar {
-          width: 45px;  // Increased from 40px
-          height: 45px;
-          font-size: 20px;
-        }
-
-        .student-basic-info {
-          h4 {
-            padding-inline: 8px;
-            font-size: 18px;
-            min-width: 140px;
-          }
-
-          .status-container {
-            .status-badge, .stage {
-              font-size: 16px;
-              min-width: 80px;
-              padding: 0.35rem 1rem;
-            }
-          }
-        }
-      }
-
-      .student-details {
-        .info-row {
-          p {
-            font-size: 16px;
-            padding: 6px 24px;
-          }
-        }
-      }
-    }
-
-    // Desktop
-    @media (min-width: 1200px) {
-      flex-direction: row;
-      align-items: center;
-      gap: 1.5rem;
-
-      .student-header {
-        width: auto;
-        margin-inline:10px;
-        .avatar {
-          width: 50px;  
-          height: 45px;
-          font-size: 22px;
-        }
-
-        .student-basic-info {
-          flex-direction: column;
-          align-items: center;
-          justify-content: flex-start;
-          gap: 1.5rem;
-
-          h4 {
-            font-size: 20px;
-            min-width: 160px;
-          }
-
-          .status-container {
-            .status-badge, .stage {
-              font-size: 16px;
-              min-width: 85px;
-              padding: 0.4rem 1.2rem;
-            }
-          }
-        }
-      }
-
-      .student-details {
-        padding: 0.5rem;
-        
-        .info-row {
-          gap: 0.75rem;
-          
-          p {
-            font-size: 16px;
-            padding: 8px 28px;
-          }
-        }
-      }
-    }
-
-    .student-header {
+    z-index: 1;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    .action-btn {
+      width: 60px;
+      height: 100%;
+      border: none;
       display: flex;
       align-items: center;
-      gap: clamp(2px, 1vw, 4px);
-      width: 100%;
+      justify-content: center;
+      cursor: pointer;
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-      .avatar {
-        width: 45px;
-        height: 40px;
-        background-color: var(--color-avatar);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: clamp(16px, 3vw, 18px);  // Increased font size
-        color: var(--color-avatar-text);
+      &:nth-child(1) { transition-delay: 0s; }
+      &:nth-child(2) { transition-delay: 0.05s; }
+
+      .material-symbols-outlined {
+        color: white;
+        font-size: 24px;
       }
 
-      .student-basic-info {
+      &.delete-btn {
+        background-color: var(--color-error, #ef4444);
+      }
+
+      &.edit-btn {
+        background-color: var(--color-primary, #3572EF);
+      }
+    }
+  }
+
+  &.is-sliding {
+    border-color: var(--color-primary, #3572EF);
+    
+    .action-buttons {
+      transform: translateX(0);
+
+      .action-btn {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  .student-preview {
+    position: relative;
+    display: flex;
+    width: 100%;
+    background: var(--color-white);
+    border-radius: 8px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+
+    a {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 0.5rem;
+      padding: 16px;
+      text-decoration: none;
+
+      .student-header {
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;  
-        padding-inline: 8px;
-        gap: 0.25rem;
+        align-items: center;
+        gap: 12px;
+        min-width: 200px;
 
-        h4 {
-          font-size: clamp(14px, 3.5vw, 16px);
-          font-weight: 700;
-          color: var(--color-text-dark);
-          margin: 0;
-          min-width: clamp(120px, 15vw, 85px);
-        }
-
-        .status-container {
+        .avatar {
+          width: 45px;
+          height: 45px;
+          background-color: var(--color-avatar);
+          border-radius: 50%;
           display: flex;
           align-items: center;
-          gap: clamp(0.25rem, 1vw, 0.4rem);
-          flex-wrap: wrap;
+          justify-content: center;
+          font-weight: 700;
+          font-size: 18px;
+          color: var(--color-avatar-text);
+          flex-shrink: 0;
+        }
 
-          .status-badge, .stage {
-            font-size: clamp(12px, 3vw, 14px);
-            padding: 0.25rem clamp(0.5rem, 2vw, 0.75rem);
-            border-radius: 9999px;
-            min-width: clamp(50px, 10vw, 65px);
-            text-align: center;
-            white-space: nowrap;
+        .student-basic-info {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin: 0;
           }
 
-          .status-badge {
-            &.passed { background: linear-gradient(90deg, #4ade80, #22c55e); color: white; }
-            &.failed { background: linear-gradient(90deg, #f87171, #ef4444); color: white; }
-            &.not_tested { background: linear-gradient(90deg, #9ca3af, #6b7280); color: white; }
-          }
+          .status-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
 
-          .stage {
-            color: #6b7280;
-            background-color: #f3f4f6;
+            .status-badge,
+            .stage {
+              font-size: 14px;
+              padding: 4px 12px;
+              border-radius: 9999px;
+              min-width: 65px;
+              text-align: center;
+              white-space: nowrap;
+            }
+
+            .status-badge {
+              &.passed {
+                background: linear-gradient(90deg, #4ade80, #22c55e);
+                color: white;
+              }
+              &.failed {
+                background: linear-gradient(90deg, #f87171, #ef4444);
+                color: white;
+              }
+              &.not_tested {
+                background: linear-gradient(90deg, #9ca3af, #6b7280);
+                color: white;
+              }
+            }
+
+            .stage {
+              color: #6b7280;
+              background-color: #f3f4f6;
+            }
           }
         }
       }
-    }
 
-    .student-details {
-      padding: clamp(0.25rem, 1vw, 0.5rem);
-      width: 100%;
-
-      .info-row {
+      .student-details {
         display: flex;
         align-items: center;
-        flex-wrap: wrap;
-        gap: clamp(0.25rem, 1vw, 0.5rem);
-        margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
+        padding: 0 16px;
+        overflow-y: scroll;
 
-        p {
-          font-size: clamp(12px, 3vw, 14px);
-          padding: clamp(4px, 1vw, 5px) clamp(12px, 3vw, 20px);
-          border-radius: 20px;
-          margin: 0;
-          background-color: var(--color-tag);
-          color: var(--color-text-dark);
-          white-space: nowrap;
+        .info-row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          p {
+            font-size: 14px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin: 0;
+            background-color: var(--color-tag);
+            color: var(--color-text-dark);
+            white-space: nowrap;
+          }
         }
       }
     }
-  }
-
-  .actions-container {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin: 10px;
-
-    .material-symbols-outlined {
-      padding: clamp(4px, 1vw, 5px);
-      border-radius: 50%;
-      background-color: transparent;
-      border: none;
-      font-size: clamp(20px, 3vw, 18px);  // Decreased from 18px, 4vw, 20px
-
-      @media (min-width: 768px) {
-        font-size: 20px;  // Decreased from 24px
-        padding: 6px;     // Decreased from 8px
-      }
-
-      &:hover {
-        background-color: var(--color-tag);
-        cursor: pointer;
-      }
-    }
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }

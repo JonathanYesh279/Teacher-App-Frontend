@@ -3,7 +3,6 @@ import { TeacherFormModal } from './TeacherFormModal'
 
 export function TeacherPreview({ teacher, onRemoveTeacher, onUpdateTeacher }) {
   if (!teacher) return null
-  console.log(teacher)
 
   function getTeacherRoles() {
     return teacher.roles.map(role => {
@@ -35,7 +34,7 @@ export function TeacherPreview({ teacher, onRemoveTeacher, onUpdateTeacher }) {
       <div className='actions-container'>
         <button
           className='material-symbols-outlined'
-          onClick={onRemoveTeacher}
+          onClick={() => onRemoveTeacher(teacher._id)}
         >
           delete
         </button>

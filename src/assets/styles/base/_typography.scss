@@ -22,19 +22,20 @@
 
   .menu-checkbox {
     position: fixed;
-    top: 40px;
-    right: 30px;
+    top: 35px;
+    right: 16px;
     width: 24px;
     height: 24px;
     opacity: 0;
     cursor: pointer;
     z-index: 21;
+    -webkit-tap-highlight-color: transparent; 
   }
 
   label.material-symbols-outlined {
     position: fixed;
-    top: 40px;
-    right: 30px;
+    top: 35px;
+    right: 16px;
     width: 24px;
     height: 24px;
     display: flex;
@@ -43,6 +44,7 @@
     color: var(--color-icons);
     cursor: pointer;
     z-index: 20;
+    -webkit-tap-highlight-color: transparent; 
   }
 
   main {
@@ -52,6 +54,7 @@
     display: flex;
     min-height: 0;
     overflow: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
   .menu-checkbox:checked ~ main .sidebar {

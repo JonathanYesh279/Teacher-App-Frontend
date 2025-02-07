@@ -22,8 +22,9 @@ html, body {
   background-color: var(--color-body);
   font-family: 'Reisinger-Idan-Regular', sans-serif;
   font-size: var(--font-md);
-  overflow: hidden;
-  height: 100vh;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 label.material-symbols-outlined {

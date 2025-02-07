@@ -13,11 +13,23 @@ export function TeacherPreview({ teacher, onRemoveTeacher, onUpdateTeacher }) {
     setIsSwiping(true);
   }
 
+  const THRESHOLD = 15; // Minimum distance before sliding starts
+  const MAX_SLIDE = 120; // Maximum slide distance
+
   function handleTouchMove(e) {
     if (!isSwiping) return;
     const diff = e.touches[0].clientX - startX;
-    // Only allow sliding to the right
-    const newX = Math.min(120, Math.max(0, diff));
+
+    // Only allow sliding to the right and apply threshold
+    if (diff < THRESHOLD) {
+      setCurrentX(0);
+      return;
+    }
+
+    // Scale the movement to feel less sensitive
+    // Subtract threshold and scale remaining distance
+    const scaledDiff = (diff - THRESHOLD) * 0.7; // Reduce sensitivity by 30%
+    const newX = Math.min(MAX_SLIDE, Math.max(0, scaledDiff));
     setCurrentX(newX);
   }
 
@@ -108,6 +120,7 @@ export function TeacherPreview({ teacher, onRemoveTeacher, onUpdateTeacher }) {
           <div className='teacher-details'>
             <div className='info-row'>
               <p>{teacher.instrument}</p>
+              {teacher.phone && <p>{teacher.phone}</p>}
             </div>
           </div>
         </Link>

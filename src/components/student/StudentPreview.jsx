@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { StudentFormModal } from './StudentFormModal';
 
 export function StudentPreview({ student, onRemoveStudent, onUpdateStudent }) {
@@ -7,7 +7,9 @@ export function StudentPreview({ student, onRemoveStudent, onUpdateStudent }) {
   const [currentX, setCurrentX] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
   const previewRef = useRef(null);
-  console.log(student)
+
+  const THRESHOLD = 15; // Minimum distance before sliding starts
+  const MAX_SLIDE = 120; // Maximum slide distance
 
   function handleTouchStart(e) {
     setStartX(e.touches[0].clientX);
@@ -17,16 +19,25 @@ export function StudentPreview({ student, onRemoveStudent, onUpdateStudent }) {
   function handleTouchMove(e) {
     if (!isSwiping) return;
     const diff = e.touches[0].clientX - startX;
-    // Only allow sliding to the right
-    const newX = Math.min(120, Math.max(0, diff));
+
+    // Only allow sliding to the right and apply threshold
+    if (diff < THRESHOLD) {
+      setCurrentX(0);
+      return;
+    }
+
+    // Scale the movement to feel less sensitive
+    const scaledDiff = (diff - THRESHOLD) * 0.7; // Reduce sensitivity by 30%
+    const newX = Math.min(MAX_SLIDE, Math.max(0, scaledDiff));
     setCurrentX(newX);
   }
 
   function handleTouchEnd() {
     setIsSwiping(false);
-    // Snap to position
-    if (currentX > 60) {
-      setCurrentX(120);
+    // Snap to position with a more generous threshold
+    if (currentX > MAX_SLIDE * 0.3) {
+      // Only snap open if pulled 30% of max distance
+      setCurrentX(MAX_SLIDE);
     } else {
       setCurrentX(0);
     }

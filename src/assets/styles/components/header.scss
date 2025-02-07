@@ -8,6 +8,10 @@
   align-items: center;
   height: 100px;
   padding-inline: 20px;
+   &.login-header {
+    padding: 20px;
+   }
+
   .logo-container {
     display: flex;
     justify-content: flex-end;

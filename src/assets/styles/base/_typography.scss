@@ -22,8 +22,8 @@
 
   .menu-checkbox {
     position: fixed;
-    top: 35px;
-    right: 16px;
+    top: 45px;
+    right: 30px;
     width: 24px;
     height: 24px;
     opacity: 0;
@@ -32,10 +32,10 @@
     -webkit-tap-highlight-color: transparent; 
   }
 
-  label.material-symbols-outlined {
+  .menu-toggle {
     position: fixed;
-    top: 35px;
-    right: 16px;
+    top: 45px;
+    right: 30px;
     width: 24px;
     height: 24px;
     display: flex;
@@ -44,7 +44,22 @@
     color: var(--color-icons);
     cursor: pointer;
     z-index: 20;
-    -webkit-tap-highlight-color: transparent; 
+    -webkit-tap-highlight-color: transparent;
+
+    .menu-icon,
+    .close-icon {
+      display: block;
+      position: absolute;
+      transition: opacity 0.3s ease;
+    }
+
+    .close-icon {
+      opacity: 0;
+    }
+
+    .menu-icon {
+      opacity: 1;
+    }
   }
 
   main {
@@ -71,5 +86,16 @@
     opacity: 1;
     pointer-events: all;
     z-index: 51;
+  }
+
+  // Icon toggle styles
+  .menu-checkbox:not(:checked) ~ .menu-toggle {
+    .menu-icon {
+      opacity: 0;
+    }
+    
+    .close-icon {
+      opacity: 1;
+    }
   }
 }

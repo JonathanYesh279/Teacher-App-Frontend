@@ -13,7 +13,7 @@ export function TeacherPreview({ teacher, onRemoveTeacher, onUpdateTeacher }) {
     setIsSwiping(true);
   }
 
-  const THRESHOLD = 15; // Minimum distance before sliding starts
+  const THRESHOLD = 35; // Minimum distance before sliding starts
   const MAX_SLIDE = 120; // Maximum slide distance
 
   function handleTouchMove(e) {
@@ -28,7 +28,7 @@ export function TeacherPreview({ teacher, onRemoveTeacher, onUpdateTeacher }) {
 
     // Scale the movement to feel less sensitive
     // Subtract threshold and scale remaining distance
-    const scaledDiff = (diff - THRESHOLD) * 0.7; // Reduce sensitivity by 30%
+    const scaledDiff = (diff - THRESHOLD) * 0.5; // Reduce sensitivity by 30%
     const newX = Math.min(MAX_SLIDE, Math.max(0, scaledDiff));
     setCurrentX(newX);
   }

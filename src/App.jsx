@@ -1,4 +1,3 @@
-// App.jsx
 import { useRoutes, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.jsx';
 import routes from './routes/routes.jsx';
@@ -14,7 +13,6 @@ function App() {
     <AuthProvider>
       <div className='app'>
         <Header />
-        {/* Menu components only when not on login page */}
         {!isLoginPage && (
           <>
             <input
@@ -25,9 +23,10 @@ function App() {
             />
             <label
               htmlFor='menu-checkbox'
-              className='material-symbols-outlined'
+              className='material-symbols-outlined menu-toggle'
             >
-              menu
+              <span className='menu-icon'>menu</span>
+              <span className='close-icon'>close</span>
             </label>
             <label htmlFor='menu-checkbox' className='overlay'></label>
           </>

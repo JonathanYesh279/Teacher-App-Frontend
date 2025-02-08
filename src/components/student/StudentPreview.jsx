@@ -8,7 +8,7 @@ export function StudentPreview({ student, onRemoveStudent, onUpdateStudent }) {
   const [isSwiping, setIsSwiping] = useState(false);
   const previewRef = useRef(null);
 
-  const THRESHOLD = 15; // Minimum distance before sliding starts
+  const THRESHOLD = 35; // Minimum distance before sliding starts
   const MAX_SLIDE = 120; // Maximum slide distance
 
   function handleTouchStart(e) {
@@ -56,7 +56,7 @@ export function StudentPreview({ student, onRemoveStudent, onUpdateStudent }) {
 
   function getStatusLabel() {
     if (student.stageTest === 'passed') return 'עבר';
-    if (student.stageTest === 'failed') return 'נכשל';
+    if (student.stageTest === 'failed') return 'לא עבר';
     if (student.stageTest === 'not_tested') return 'לא נבחן';
     return '';
   }

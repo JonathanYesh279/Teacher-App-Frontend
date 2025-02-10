@@ -25,7 +25,7 @@ export function TeacherList({ teachers = [], onRemoveTeacher, onUpdateTeacher })
   if (!teachers.length) return <div>No teacher found</div>
 
   return (
-    <div className='teacher-list'>
+    <div className='teacher-list' ref={listRef}>
       {teachers.map(teacher => (
         <TeacherPreview
           key={teacher._id}

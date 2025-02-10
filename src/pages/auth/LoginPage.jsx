@@ -1,3 +1,4 @@
+// LoginPage.jsx
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -9,9 +10,8 @@ export function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const { login, teacher } = useAuth(); // Get teacher from context
+  const { login, teacher } = useAuth();
 
-  // Redirect if already logged in
   useEffect(() => {
     if (teacher) {
       console.log('User already logged in, redirecting...');
@@ -29,7 +29,6 @@ export function LoginPage() {
       const result = await login(email, password);
       console.log('Login successful:', result);
 
-      // Wait for state to update
       setTimeout(() => {
         if (result) {
           console.log('Navigating to students page...');
@@ -46,37 +45,47 @@ export function LoginPage() {
 
   return (
     <div className='login-page'>
-      <div className='login-header'>
-        <h1>התחברות</h1>
-        <p>התחבר עם האימייל והסיסמה שלך</p>
-      </div>
+      <div className='login-header'></div>
       <div className='login-content'>
+        <h1>התחברות</h1>
         <form onSubmit={handleSubmit}>
           {error && <div className='error-message'>{error}</div>}
-          <div className='form-group'>
-            <label>Email</label>
-            <input
-              type='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder='yourEmail@email.com'
-              required
-              disabled={isLoading}
-            />
+          <div className='form-row'>
+            <div className='form-field full-width'>
+              <div className='input-container'>
+                <input
+                  id='email'
+                  type='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder=' '
+                  required
+                  disabled={isLoading}
+                />
+                <label htmlFor='email'>אימייל</label>
+              </div>
+            </div>
           </div>
-          <div className='form-group'>
-            <label>Password</label>
-            <input
-              type='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder='Password'
-              required
-              disabled={isLoading}
-            />
+
+          <div className='form-row'>
+            <div className='form-field full-width'>
+              <div className='input-container'>
+                <input
+                  id='password'
+                  type='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder=' '
+                  required
+                  disabled={isLoading}
+                />
+                <label htmlFor='password'>סיסמה</label>
+              </div>
+            </div>
           </div>
-          <div>
-            <button className='btn' type='submit' disabled={isLoading}>
+
+          <div className='dialog-footer'>
+            <button type='submit' className='btn-primary' disabled={isLoading}>
               {isLoading ? 'מתחבר...' : 'התחבר'}
             </button>
           </div>

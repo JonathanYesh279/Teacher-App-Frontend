@@ -13,6 +13,7 @@ export function StudentDetails() {
   const { students, onRemoveStudent, onUpdateStudent } = useOutletContext();
   const [activeTab, setActiveTab] = useState('overview');
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     const menu = document.querySelector('.slider-menu');
@@ -101,6 +102,22 @@ export function StudentDetails() {
                       </>
                     )}
                 </div>
+              </div>
+            </li>
+
+            <li className='student-info-item'>
+              <span className='material-symbols-outlined'>build</span>
+              <div>
+                <label>מבחן טכני</label>
+                <p>
+                  {student.technicalTest === 'not_tested'
+                    ? 'לא נבחן'
+                    : student.technicalTest === 'passed'
+                    ? 'עבר'
+                    : student.technicalTest === 'failed'
+                    ? 'לא עבר'
+                    : null}
+                </p>
               </div>
             </li>
 

@@ -1,7 +1,7 @@
 .student-preview-container {
   position: relative;
   width: 100%;
-  min-height: 95px;
+  min-height: 125px;
   border-radius: 8px;
   overflow: hidden;
   background: var(--color-white);
@@ -162,6 +162,7 @@
 
         .info-row {
           display: flex;
+          flex-direction: column;
           align-items: center;
           gap: 8px;
 

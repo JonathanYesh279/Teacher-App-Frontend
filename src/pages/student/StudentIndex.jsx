@@ -31,6 +31,8 @@ export function StudentIndex() {
   })
   const [searchTerm, setSearchTerm] = useState(filterBy.txt)
 
+  console.log('students:', students)
+
   const debounceSearch = useCallback(
     debounce((value) => {
       setFilterBy(prev => ({ ...prev, txt: value }))

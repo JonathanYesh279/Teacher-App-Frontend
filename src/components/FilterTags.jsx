@@ -11,7 +11,12 @@ export function FilterTags({ onFilter, filterBy }) {
     stageTest: [
       { value: 'not_tested', label: 'לא נבחן' },
       { value: 'passed', label: 'עבר' },
-      { value: 'failed', label: 'נכשל' },
+      { value: 'failed', label: 'לא עבר' },
+    ],
+    technicalTest: [
+      { value: 'not_tested', label: 'לא נבחן' },
+      { value: 'passed', label: 'עבר' },
+      { value: 'failed', label: 'לא עבר' },
     ],
     orchestras: [
       'תזמורת יצוגית נשיפה',
@@ -27,6 +32,7 @@ export function FilterTags({ onFilter, filterBy }) {
     class: 'כיתה',
     currentStage: 'שלב',
     stageTest: 'מבחן שלב',
+    technicalTest: 'מבחן טכני',
     orchestras: 'תזמורת',
   }
 
@@ -75,7 +81,6 @@ export function FilterTags({ onFilter, filterBy }) {
   }
 
   function applyFilter() {
-    console.log('Applying filter:', openFilter, selectedOptions[openFilter]); // Add this
     onFilter({ [openFilter]: selectedOptions[openFilter] });
     closeModal();
   }
@@ -83,11 +88,11 @@ export function FilterTags({ onFilter, filterBy }) {
   function renderFilterOptions() {
     if (!openFilter) return null;
 
-    if (openFilter === 'stageTest') {
+    if (openFilter === 'stageTest' || openFilter === 'technicalTest') {
       return filterOptions[openFilter].map(function (option) {
         return (
           <div
-            key={option.value}
+            key={`${option.value}-${option.label}`}
             className={`filter-option ${
               selectedOptions[openFilter] === option.value ? 'selected' : ''
             }`}
@@ -142,8 +147,8 @@ export function FilterTags({ onFilter, filterBy }) {
                 {filterBy[filterType] && (
                   <>
                     <span className='selected-value'>
-                      {filterType === 'stageTest'
-                        ? filterOptions.stageTest.find(function (opt) {
+                      {(filterType === 'stageTest' || filterType === 'technicalTest')
+                        ? filterOptions[filterType].find(function (opt) {
                             return opt.value === filterBy[filterType];
                           })?.label
                         : filterBy[filterType]}

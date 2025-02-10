@@ -13,6 +13,7 @@ export function StudentFormModal({ onAddStudent, studentToEdit, onUpdateStudent 
     teachers: studentToEdit?.teachers?.map((t) => t.teacherName).join(', ') || '',
     orchestras: Array.isArray(studentToEdit?.orchestras) ? studentToEdit.orchestras.join(', ') : '',
     stageTest: studentToEdit?.stageTest || 'not_tested',
+    technicalTest: studentToEdit?.technicalTest || 'not_tested',
   });
   const [options, setOptions] = useState({
     instruments: [],
@@ -204,6 +205,21 @@ export function StudentFormModal({ onAddStudent, studentToEdit, onUpdateStudent 
                     'נכשל'
                   ]}
                   label='מבחן שלב'
+                />
+              </div>
+              <div className='form-field'>
+                <AutoCompleteDropDown
+                  value={formData.technicalTest === 'not_tested' ? 'לא נבחן' : 
+                        formData.technicalTest === 'passed' ? 'עבר' : 
+                        formData.technicalTest === 'failed' ? 'לא עבר' : ''}
+                  onChange={(label) => {
+                    const value = label === 'לא נבחן' ? 'not_tested' : 
+                                label === 'עבר' ? 'passed' : 
+                                label === 'לא עבר' ? 'failed' : 'not_tested';
+                    setFormData({ ...formData, technicalTest: value });
+                  }}
+                  options={['לא נבחן', 'עבר', 'לא עבר']}
+                  label='מבחן טכני'
                 />
               </div>
             </div>

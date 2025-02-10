@@ -19,11 +19,13 @@ export function FilterTags({ onFilter, filterBy }) {
       'תזמורת עתודה נשיפה',
       'תזמורת צעירה נשיפה',
     ],
+    currentStage: [1, 2, 3, 4, 5, 6, 7, 8],
   };
 
   const filterTitles = {
     instrument: 'כלי נגינה',
     class: 'כיתה',
+    currentStage: 'שלב',
     stageTest: 'מבחן שלב',
     orchestras: 'תזמורת',
   }
@@ -73,6 +75,7 @@ export function FilterTags({ onFilter, filterBy }) {
   }
 
   function applyFilter() {
+    console.log('Applying filter:', openFilter, selectedOptions[openFilter]); // Add this
     onFilter({ [openFilter]: selectedOptions[openFilter] });
     closeModal();
   }

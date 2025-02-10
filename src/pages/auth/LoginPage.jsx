@@ -45,10 +45,9 @@ export function LoginPage() {
 
   return (
     <div className='login-page'>
-      <div className='login-header'>
-        <h1>התחברות</h1>
-      </div>
+      <div className='login-header'></div>
       <div className='login-content'>
+        <h1>התחברות</h1>
         <form onSubmit={handleSubmit}>
           {error && <div className='error-message'>{error}</div>}
           <div className='form-row'>

@@ -6,11 +6,17 @@
   flex-direction: column;
   overflow: hidden;
 
+  &.login-layout {
+    background-image: url('../images/login_background_image.jpg');
+    background-size: cover;
+    background-position: center;;
+  }
+
   .overlay {
     position: fixed;
-    top: 0;
+    top: 270px;
     left: 0;
-    right: 200px;
+    right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 14;
@@ -38,6 +44,7 @@
     right: 30px;
     width: 24px;
     height: 24px;
+    font-size: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,7 +80,7 @@
   }
 
   .menu-checkbox:checked ~ main .sidebar {
-    width: 0;
+    height: 0;
     overflow: hidden;
     transition: width 0.3s ease;
 

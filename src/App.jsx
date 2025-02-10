@@ -11,7 +11,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <div className='app'>
+      <div className={`app ${isLoginPage ? 'login-layout' : ''}`}>
         <Header />
         {!isLoginPage && (
           <>

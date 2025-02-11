@@ -8,29 +8,45 @@ export function OrchestraIndex() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
   const { id } = useParams()
+  console.log(orchestras)
 
   useEffect(() => {
     loadOrchestras()
   }, [])
 
-  async function loadOrchestras() {
-    try {
-      setIsLoading(true)
-      const orchestras = await orchestraService.query()
-      setOrchestras(orchestras)
-    } catch (err) {
-      setError(err)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-  
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error: {error}</div>
+ async function loadOrchestras() {
+   try {
+     setIsLoading(true);
+     const orchestras = await orchestraService.query();
+     console.log('Response from backend:', orchestras);
+     setOrchestras(orchestras);
+   } catch (err) {
+     console.error('Error:', err);
+     setError(err);
+   } finally {
+     setIsLoading(false);
+   }
+ }
 
   return (
     <div className='orchestra-index'>
-      {id ? <Outlet context={orchestras} /> : <OrchestraList orchestras={orchestras || []} />}
+      {isLoading && (
+        <div className='loading'>
+          <div className='spinner'></div>
+        </div>
+      )}
+
+      {error && (
+        <div className='error-message-container'>
+          <span className='material-symbols-outlined'>arrow_back_ios_new</span>
+          <div className='error-message'>Error: {error}</div>
+        </div>
+      )}
+      {id ? (
+        <Outlet context={orchestras} />
+      ) : (
+        <OrchestraList orchestras={orchestras || []} />
+      )}
     </div>
-  )
+  );
 }
